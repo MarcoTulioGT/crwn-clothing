@@ -11,7 +11,7 @@ import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '
 
 import './sign-up-form.styles.scss';
 
-import  { signUpStart } from '../../store/user/user.action';
+
 
 const defaultFormFields = {
     displayName: '',
@@ -40,11 +40,11 @@ const SignUpForm = () => {
           return;
       }
       try {
-        //const {user} = await createAuthUserWithEmailAndPassword(email, password);
+        const {user} = await createAuthUserWithEmailAndPassword(email, password);
 
-        //await createUserDocumentFromAuth(user, {displayName});
+        await createUserDocumentFromAuth(user, {displayName});
         
-        dispatch(signUpStart(email, password, displayName));
+        //dispatch(signUpStart(email, password, displayName));
         resetFormFields();
       }catch(error){
           if(error.code === 'auth/email-already-in-use'){

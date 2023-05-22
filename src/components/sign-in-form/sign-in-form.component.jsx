@@ -5,10 +5,10 @@ import  { useDispatch } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
 import Button,{ BUTTON_TYPE_CLASSES} from '../button/button.component';
 
-//import { signInWithGooglePopup,  asignInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
+import { signInWithGooglePopup,  signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
 
 import './sign-in-form.styles.scss';
-import { googleSignInStart, emailSignInStart } from '../../store/user/user.action';
+//import { googleSignInStart, emailSignInStart } from '../../store/user/user.action';
 
 const defaultFormFields = {
     email: '',
@@ -26,7 +26,7 @@ const SignInForm = () => {
     }
 
     const sigInWithGoogle = async () => {
-       dispatch(googleSignInStart())
+       await signInWithGooglePopup();
 
     }
 
@@ -34,8 +34,8 @@ const SignInForm = () => {
         event.preventDefault();
 
       try {
-          //await asignInAuthUserWithEmailAndPassword(email, password);
-          dispatch(emailSignInStart(email, password));
+          await signInAuthUserWithEmailAndPassword(email, password);
+          //dispatch(emailSignInStart(email, password));
           resetFormFields();
       }catch(error){
         switch (error.code) {
